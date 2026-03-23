@@ -88,6 +88,8 @@ app.post("/api/contact", async (req, reply) => {
     }
 });
 
+app.get("/", async () => "hello there pleae fuck off");
+
 app.get("/health", async () => ({ ok: true, service: "backend" }));
 
 /* -------------------- START -------------------- */
