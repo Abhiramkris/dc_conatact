@@ -3,6 +3,7 @@ require("dotenv").config();
 const fastify = require("fastify");
 const cors = require("@fastify/cors");
 const fastifyCookie = require("@fastify/cookie");
+const fastifyRateLimit = require("@fastify/rate-limit");
 const { Resend } = require("resend");
 
 const app = fastify({ logger: true });
@@ -54,6 +55,15 @@ app.register(cors, {
 
 app.register(fastifyCookie, {
     secret: process.env.COOKIE_SECRET || "dev_secret",
+});
+
+app.register(fastifyRateLimit, {
+    max: 2,
+    timeWindow: '1 minute',
+    errorResponseBuilder: (req, context) => ({
+        ok: false,
+        error: "Too many requests, please try again later."
+    })
 });
 
 /* -------------------- ROUTES -------------------- */
