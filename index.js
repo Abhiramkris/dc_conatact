@@ -42,7 +42,7 @@ app.addContentTypeParser("*", { parseAs: "buffer" }, function (req, body, done) 
 
 /* -------------------- MIDDLEWARE -------------------- */
 app.register(cors, {
-    origin: ["https://dc-conatact.vercel.app"], 
+    origin: [/localhost/, /\.distinctcomm\.co\.in$/, "https://dc-conatact.vercel.app"], 
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true
 });
